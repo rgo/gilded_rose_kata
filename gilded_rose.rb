@@ -11,6 +11,25 @@ def decrement_quality(item)
   item.quality -= 1 if item.name != SULFURAS
 end
 
+def increment_backstage_quality(item)
+  if item.name == BACKSTAGE && item.quality < MAX_QUALITY
+    if item.sell_in < BACKSTAGE_SELL_IN_DOUBLE
+      if item.quality < MAX_QUALITY
+        item.quality += 1
+      end
+    end
+    if item.sell_in < BACKSTAGE_SELL_IN_TRIPLE
+      if item.quality < MAX_QUALITY
+        item.quality += 1
+      end
+    end
+  end
+end
+
+def increment_quality(item)
+  item.quality += 1 if item.quality < MAX_QUALITY
+end
+
 def update_quality(items)
   items.each do |item|
     if item.name != BRIE && item.name != BACKSTAGE
@@ -18,21 +37,8 @@ def update_quality(items)
         decrement_quality item
       end
     else
-      if item.quality < MAX_QUALITY
-        item.quality += 1
-        if item.name == BACKSTAGE
-          if item.sell_in < BACKSTAGE_SELL_IN_DOUBLE
-            if item.quality < MAX_QUALITY
-              item.quality += 1
-            end
-          end
-          if item.sell_in < BACKSTAGE_SELL_IN_TRIPLE
-            if item.quality < MAX_QUALITY
-              item.quality += 1
-            end
-          end
-        end
-      end
+      increment_quality item
+      increment_backstage_quality item
     end
     if item.name != SULFURAS
       item.sell_in -= 1
@@ -47,9 +53,7 @@ def update_quality(items)
           item.quality = item.quality - item.quality
         end
       else
-        if item.quality < MAX_QUALITY
-          item.quality += 1
-        end
+        increment_quality item
       end
     end
   end

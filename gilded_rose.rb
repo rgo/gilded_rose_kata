@@ -1,10 +1,12 @@
+def decrement_quality(item)
+  item.quality -= 1 if item.name != 'Sulfuras, Hand of Ragnaros'
+end
+
 def update_quality(items)
   items.each do |item|
     if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
       if item.quality > 0
-        if item.name != 'Sulfuras, Hand of Ragnaros'
-          item.quality -= 1
-        end
+        decrement_quality item
       end
     else
       if item.quality < 50
@@ -30,9 +32,7 @@ def update_quality(items)
       if item.name != "Aged Brie"
         if item.name != 'Backstage passes to a TAFKAL80ETC concert'
           if item.quality > 0
-            if item.name != 'Sulfuras, Hand of Ragnaros'
-              item.quality -= 1
-            end
+            decrement_quality item
           end
         else
           item.quality = item.quality - item.quality

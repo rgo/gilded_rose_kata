@@ -1,6 +1,11 @@
 SULFURAS = 'Sulfuras, Hand of Ragnaros'
 BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert'
 BRIE = 'Aged Brie'
+MIN_QUALITY = 0
+MAX_QUALITY = 50
+SELL_IN_DAY = 0
+BACKSTAGE_SELL_IN_DOUBLE= 11
+BACKSTAGE_SELL_IN_TRIPLE= 6
 
 def decrement_quality(item)
   item.quality -= 1 if item.name != SULFURAS
@@ -9,20 +14,20 @@ end
 def update_quality(items)
   items.each do |item|
     if item.name != BRIE && item.name != BACKSTAGE
-      if item.quality > 0
+      if item.quality > MIN_QUALITY
         decrement_quality item
       end
     else
-      if item.quality < 50
+      if item.quality < MAX_QUALITY
         item.quality += 1
         if item.name == BACKSTAGE
-          if item.sell_in < 11
-            if item.quality < 50
+          if item.sell_in < BACKSTAGE_SELL_IN_DOUBLE
+            if item.quality < MAX_QUALITY
               item.quality += 1
             end
           end
-          if item.sell_in < 6
-            if item.quality < 50
+          if item.sell_in < BACKSTAGE_SELL_IN_TRIPLE
+            if item.quality < MAX_QUALITY
               item.quality += 1
             end
           end
@@ -32,17 +37,17 @@ def update_quality(items)
     if item.name != SULFURAS
       item.sell_in -= 1
     end
-    if item.sell_in < 0
+    if item.sell_in < SELL_IN_DAY
       if item.name != BRIE
         if item.name != BACKSTAGE
-          if item.quality > 0
+          if item.quality > MIN_QUALITY
             decrement_quality item
           end
         else
           item.quality = item.quality - item.quality
         end
       else
-        if item.quality < 50
+        if item.quality < MAX_QUALITY
           item.quality += 1
         end
       end

@@ -7,11 +7,6 @@ require 'lib/backstage_quality_updater.rb'
 SULFURAS = 'Sulfuras, Hand of Ragnaros'.freeze
 BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert'.freeze
 BRIE = 'Aged Brie'.freeze
-MIN_QUALITY = 0
-MAX_QUALITY = 50
-SELL_IN_DAY = 0
-BACKSTAGE_SELL_IN_DOUBLE = 11
-BACKSTAGE_SELL_IN_TRIPLE = 6
 
 def update_quality(items)
   items.each do |item|

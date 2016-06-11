@@ -8,6 +8,7 @@ BACKSTAGE_SELL_IN_DOUBLE = 11
 BACKSTAGE_SELL_IN_TRIPLE = 6
 
 def decrement_quality(item)
+  return unless item.quality > MIN_QUALITY
   item.quality -= 1 if item.name != SULFURAS
 end
 
@@ -29,9 +30,7 @@ end
 def update_quality(items)
   items.each do |item|
     if item.name != BRIE && item.name != BACKSTAGE
-      if item.quality > MIN_QUALITY
-        decrement_quality item
-      end
+      decrement_quality item
     else
       increment_quality item
       increment_backstage_quality item
@@ -42,9 +41,7 @@ def update_quality(items)
     if item.sell_in < SELL_IN_DAY
       if item.name != BRIE
         if item.name != BACKSTAGE
-          if item.quality > MIN_QUALITY
-            decrement_quality item
-          end
+          decrement_quality item
         else
           item.quality = item.quality - item.quality
         end

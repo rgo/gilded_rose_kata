@@ -41,5 +41,6 @@ guard :rspec, cmd: 'bundle exec rspec' do
   dsl.watch_spec_files_for(ruby.lib_files)
 
   watch(%r{^spec/(.+)_spec\.rb$})
+  watch(%r{^lib/(.+)\.rb}) { 'spec' }
   watch('gilded_rose.rb') { 'spec' }
 end

@@ -13,32 +13,6 @@ SELL_IN_DAY = 0
 BACKSTAGE_SELL_IN_DOUBLE = 11
 BACKSTAGE_SELL_IN_TRIPLE = 6
 
-def decrement_quality(item)
-  return unless item.quality > MIN_QUALITY
-  return if item.name == SULFURAS
-
-  item.quality -= 1
-end
-
-def increment_backstage_quality(item)
-  return if item.name != BACKSTAGE || item.quality >= MAX_QUALITY
-
-  increment_quality item if item.sell_in < BACKSTAGE_SELL_IN_DOUBLE
-  increment_quality item if item.sell_in < BACKSTAGE_SELL_IN_TRIPLE
-end
-
-def increment_quality(item)
-  return unless item.quality < MAX_QUALITY
-
-  item.quality += 1
-end
-
-def decrement_sell_in(item)
-  return if item.name == SULFURAS
-
-  item.sell_in -= 1
-end
-
 def update_quality(items)
   items.each do |item|
     if item.name == SULFURAS
@@ -61,25 +35,6 @@ def update_quality(items)
 
     quality_updater = QualityUpdater.new(AnyItemQualityUpdater.new)
     quality_updater.do item
-
-    # if item.name != BRIE && item.name != BACKSTAGE
-    #   decrement_quality item
-    # else
-    #   increment_quality item
-    #   increment_backstage_quality item
-    # end
-
-    # decrement_sell_in item
-
-    # next unless item.sell_in < SELL_IN_DAY
-
-    # if item.name != BRIE && item.name != BACKSTAGE
-    #   decrement_quality item
-    # else
-    #   increment_quality item
-    # end
-
-    # item.quality = 0 if item.name == BACKSTAGE
   end
 end
 

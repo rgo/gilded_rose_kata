@@ -2,6 +2,7 @@ require 'lib/quality_updater.rb'
 require 'lib/any_item_quality_updater.rb'
 require 'lib/sulfuras_quality_updater.rb'
 require 'lib/brie_quality_updater.rb'
+require 'lib/backstage_quality_updater.rb'
 
 SULFURAS = 'Sulfuras, Hand of Ragnaros'.freeze
 BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert'.freeze
@@ -51,30 +52,34 @@ def update_quality(items)
       quality_updater.do item
       next
     end
-    if item.name != BACKSTAGE
-      quality_updater = QualityUpdater.new(AnyItemQualityUpdater.new)
+
+    if item.name == BACKSTAGE
+      quality_updater = QualityUpdater.new(BackstageQualityUpdater.new)
       quality_updater.do item
       next
     end
 
-    if item.name != BRIE && item.name != BACKSTAGE
-      decrement_quality item
-    else
-      increment_quality item
-      increment_backstage_quality item
-    end
+    quality_updater = QualityUpdater.new(AnyItemQualityUpdater.new)
+    quality_updater.do item
 
-    decrement_sell_in item
+    # if item.name != BRIE && item.name != BACKSTAGE
+    #   decrement_quality item
+    # else
+    #   increment_quality item
+    #   increment_backstage_quality item
+    # end
 
-    next unless item.sell_in < SELL_IN_DAY
+    # decrement_sell_in item
 
-    if item.name != BRIE && item.name != BACKSTAGE
-      decrement_quality item
-    else
-      increment_quality item
-    end
+    # next unless item.sell_in < SELL_IN_DAY
 
-    item.quality = 0 if item.name == BACKSTAGE
+    # if item.name != BRIE && item.name != BACKSTAGE
+    #   decrement_quality item
+    # else
+    #   increment_quality item
+    # end
+
+    # item.quality = 0 if item.name == BACKSTAGE
   end
 end
 

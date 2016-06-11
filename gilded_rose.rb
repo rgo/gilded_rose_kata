@@ -27,6 +27,11 @@ def increment_quality(item)
   item.quality += 1 if item.quality < MAX_QUALITY
 end
 
+def decrement_sell_in(item)
+  return if item.name == SULFURAS
+  item.sell_in -= 1
+end
+
 def update_quality(items)
   items.each do |item|
     if item.name != BRIE && item.name != BACKSTAGE
@@ -35,9 +40,9 @@ def update_quality(items)
       increment_quality item
       increment_backstage_quality item
     end
-    if item.name != SULFURAS
-      item.sell_in -= 1
-    end
+
+    decrement_sell_in item
+
     if item.sell_in < SELL_IN_DAY
       if item.name != BRIE
         if item.name != BACKSTAGE

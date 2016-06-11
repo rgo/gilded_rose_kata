@@ -29,6 +29,7 @@ end
 
 def decrement_sell_in(item)
   return if item.name == SULFURAS
+
   item.sell_in -= 1
 end
 

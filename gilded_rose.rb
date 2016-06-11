@@ -39,17 +39,15 @@ def update_quality(items)
 
     decrement_sell_in item
 
-    if item.sell_in < SELL_IN_DAY
-      if item.name != BRIE
-        if item.name != BACKSTAGE
-          decrement_quality item
-        else
-          item.quality = 0
-        end
-      else
-        increment_quality item
-      end
+    next unless item.sell_in < SELL_IN_DAY
+
+    if item.name != BRIE && item.name != BACKSTAGE
+      decrement_quality item
+    else
+      increment_quality item
     end
+
+    item.quality = 0 if item.name == BACKSTAGE
   end
 end
 

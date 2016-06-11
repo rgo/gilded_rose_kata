@@ -10,25 +10,16 @@ BRIE = 'Aged Brie'.freeze
 
 def update_quality(items)
   items.each do |item|
-    if item.name == SULFURAS
-      quality_updater = QualityUpdater.new(SulfurasQualityUpdater.new)
-      quality_updater.do item
-      next
-    end
-
-    if item.name == BRIE
-      quality_updater = QualityUpdater.new(BrieQualityUpdater.new)
-      quality_updater.do item
-      next
-    end
-
-    if item.name == BACKSTAGE
-      quality_updater = QualityUpdater.new(BackstageQualityUpdater.new)
-      quality_updater.do item
-      next
-    end
-
-    quality_updater = QualityUpdater.new(AnyItemQualityUpdater.new)
+    quality_updater = case item.name
+                      when SULFURAS
+                        QualityUpdater.new(SulfurasQualityUpdater.new)
+                      when BRIE
+                        QualityUpdater.new(BrieQualityUpdater.new)
+                      when BACKSTAGE
+                        QualityUpdater.new(BackstageQualityUpdater.new)
+                      else
+                        QualityUpdater.new(AnyItemQualityUpdater.new)
+                      end
     quality_updater.do item
   end
 end

@@ -1,3 +1,6 @@
+require 'lib/quality_updater.rb'
+require 'lib/any_item_quality_updater.rb'
+
 SULFURAS = 'Sulfuras, Hand of Ragnaros'.freeze
 BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert'.freeze
 BRIE = 'Aged Brie'.freeze
@@ -35,6 +38,12 @@ end
 
 def update_quality(items)
   items.each do |item|
+    if item.name != BRIE && item.name != BACKSTAGE && item.name != SULFURAS
+      quality_updater = QualityUpdater.new(AnyItemQualityUpdater.new)
+      quality_updater.do item
+      next
+    end
+
     if item.name != BRIE && item.name != BACKSTAGE
       decrement_quality item
     else

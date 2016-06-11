@@ -22,6 +22,10 @@ class BrieQualityUpdater
     item.quality += 1
   end
 
+  def decrement_sell_in(item)
+    item.sell_in -= 1
+  end
+
   def expired?(item)
     item.sell_in >= SELL_IN_DAY
   end

@@ -22,7 +22,9 @@ def increment_backstage_quality(item)
 end
 
 def increment_quality(item)
-  item.quality += 1 if item.quality < MAX_QUALITY
+  return unless item.quality < MAX_QUALITY
+
+  item.quality += 1
 end
 
 def decrement_sell_in(item)

@@ -14,14 +14,10 @@ end
 def increment_backstage_quality(item)
   if item.name == BACKSTAGE && item.quality < MAX_QUALITY
     if item.sell_in < BACKSTAGE_SELL_IN_DOUBLE
-      if item.quality < MAX_QUALITY
-        item.quality += 1
-      end
+      increment_quality item
     end
     if item.sell_in < BACKSTAGE_SELL_IN_TRIPLE
-      if item.quality < MAX_QUALITY
-        item.quality += 1
-      end
+      increment_quality item
     end
   end
 end

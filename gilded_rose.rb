@@ -1,6 +1,7 @@
 require 'lib/quality_updater.rb'
 require 'lib/any_item_quality_updater.rb'
 require 'lib/sulfuras_quality_updater.rb'
+require 'lib/brie_quality_updater.rb'
 
 SULFURAS = 'Sulfuras, Hand of Ragnaros'.freeze
 BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert'.freeze
@@ -45,7 +46,12 @@ def update_quality(items)
       next
     end
 
-    if item.name != BRIE && item.name != BACKSTAGE
+    if item.name == BRIE
+      quality_updater = QualityUpdater.new(BrieQualityUpdater.new)
+      quality_updater.do item
+      next
+    end
+    if item.name != BACKSTAGE
       quality_updater = QualityUpdater.new(AnyItemQualityUpdater.new)
       quality_updater.do item
       next

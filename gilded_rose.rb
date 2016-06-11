@@ -1,11 +1,11 @@
-SULFURAS = 'Sulfuras, Hand of Ragnaros'
-BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert'
-BRIE = 'Aged Brie'
+SULFURAS = 'Sulfuras, Hand of Ragnaros'.freeze
+BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert'.freeze
+BRIE = 'Aged Brie'.freeze
 MIN_QUALITY = 0
 MAX_QUALITY = 50
 SELL_IN_DAY = 0
-BACKSTAGE_SELL_IN_DOUBLE= 11
-BACKSTAGE_SELL_IN_TRIPLE= 6
+BACKSTAGE_SELL_IN_DOUBLE = 11
+BACKSTAGE_SELL_IN_TRIPLE = 6
 
 def decrement_quality(item)
   item.quality -= 1 if item.name != SULFURAS
@@ -69,4 +69,3 @@ Item = Struct.new(:name, :sell_in, :quality)
 #   Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 20),
 #   Item.new("Conjured Mana Cake", 3, 6),
 # ]
-

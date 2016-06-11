@@ -48,7 +48,7 @@ def update_quality(items)
         if item.name != BACKSTAGE
           decrement_quality item
         else
-          item.quality = item.quality - item.quality
+          item.quality = 0
         end
       else
         increment_quality item

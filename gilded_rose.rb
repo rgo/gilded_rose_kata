@@ -1,8 +1,4 @@
 require 'lib/quality_updater.rb'
-require 'lib/any_item_quality_updater.rb'
-require 'lib/sulfuras_quality_updater.rb'
-require 'lib/brie_quality_updater.rb'
-require 'lib/backstage_quality_updater.rb'
 
 def update_quality(items)
   items.each do |item|

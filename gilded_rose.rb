@@ -9,7 +9,9 @@ BACKSTAGE_SELL_IN_TRIPLE = 6
 
 def decrement_quality(item)
   return unless item.quality > MIN_QUALITY
-  item.quality -= 1 if item.name != SULFURAS
+  return if item.name == SULFURAS
+
+  item.quality -= 1
 end
 
 def increment_backstage_quality(item)

@@ -41,6 +41,14 @@ and should be ready to go. Alternatively, you can install the dependencies one b
 
 Have a look at the Gemfile for all dependencies.
 
+## Usage
+
+Since Guard is configured to watch gilded_rose.rb and spec/gilded_rose_spec.rb files, you can leave it running all the time with this command:
+
+    bundle exec guard
+
+After loading guard you can follow the red-green-green flow. Every change that you do in those files will run the test suite.
+
 ## Git Branches
 
 * The 'master' branch contains the starting point for the kata.  It is
